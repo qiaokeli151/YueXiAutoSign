@@ -10,29 +10,29 @@ def get_now():
 
 class YueXiAutoSign:
     # 登录界面 (提取loginHash)
-    _login_page = "https://bbs.wcccc.cc/member.php"  # GET
+    _login_page = "https://www.mcbbs.net/member.php"  # GET
     # 登录地址
-    _login_url = "https://bbs.wcccc.cc/member.php"  # POST
+    _login_url = "https://www.mcbbs.net/member.php"  # POST
     # 签到地址
-    _sign_url = "https://bbs.wcccc.cc/plugin.php"  # GET
+    _sign_url = "https://www.mcbbs.net/plugin.php"  # GET
     # 签到页面
-    _sign_page_url = "https://bbs.wcccc.cc/plugin.php?id=k_misign:sign" # GET
+    _sign_page_url = "https://www.mcbbs.net/plugin.php?id=dc_signin" # GET
 
-    _login_form_data = {"referer": "https://bbs.wcccc.cc/", "questionid": 0, "answer": "", "cookietime": "2592000"}
+    _login_form_data = {"referer": "https://www.mcbbs.net/", "questionid": 0, "answer": "", "cookietime": "2592000"}
 
     _login_params = {"mod": "logging","action": "login","loginsubmit": "yes","inajax": 1}
 
     _login_header = {
         "user=agent": "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35",
-        "origin": "https://bbs.wcccc.cc",
-        "referer": "https://bbs.wcccc.cc/member.php?mod=logging&action=login",
+        "origin": "https://www.mcbbs.net/",
+        "referer": "https://www.mcbbs.net//member.php?mod=logging&action=login",
     }
 
     _sign_header = {
         "user=agent": "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35",
-        "refer": "https://bbs.wcccc.cc/"
+        "refer": "https://www.mcbbs.net/"
     }
 
     def __init__(self, username, password, is_email=False):
@@ -46,7 +46,7 @@ class YueXiAutoSign:
             self._login_form_data["loginfield"] = "email"
         else:
             self._login_form_data["loginfield"] = "username"
-        self.message = f"月曦论坛签到\n账号:{username}\n"
+        self.message = f"论坛签到\n账号:{username}\n"
 
     def _get_login_hash(self):
         html = self._session.get(url=self._login_page, params={"mod": "logging", "action": "login"}).text
